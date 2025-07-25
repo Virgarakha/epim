@@ -566,3 +566,34 @@ footer {
 .footer-icons img:hover {
   filter: grayscale(0%);
 }
+
+.about {
+    width: 80%;
+    padding: 20px;
+    margin: 0 auto;
+    color: white;
+    margin-top: 10vh;
+}
+
+.about h1 {
+    margin-bottom: 5vh;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.about p {
+    font-size: 20px;
+    color: rgb(208, 208, 208);
+}
+
+.about span {
+    color: #7B00FF;
+}
+
+.about .square {
+    background-color: #7B00FF;
+    color: white;
+    padding: 10px;
+}
