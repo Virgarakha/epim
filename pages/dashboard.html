@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard User - Turnamen</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter&display=swap">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: black;
+
+      color: white;
+    }
+
+ .container {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .dashboard {
+    width: 100%;
+    max-width: 1100px;
+    background-color: #1a1a1a;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(107, 72, 255, 0.1);
+  }
+
+  .dashboard h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 26px;
+    color: #ffffff;
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    overflow-x: auto;
+  }
+
+  .table th, .table td {
+    padding: 14px;
+    text-align: center;
+    border-bottom: 1px solid #333;
+  }
+
+  .table th {
+    background-color: #6b48ff;
+    color: white;
+    font-weight: 600;
+  }
+
+  .table td {
+    background-color: #2a2a2a;
+  }
+
+  .table tr:hover td {
+    background-color: #383838;
+    transition: 0.3s ease;
+  }
+
+  .table .highlight td {
+    background-color: #ff9b00 !important;
+    color: black;
+  }
+
+  .btn-logout {
+    display: block;
+    background-color: #6b48ff;
+    color: white;
+    text-align: center;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-top: 30px;
+    width: 100%;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s ease;
+  }
+
+  .btn-logout:hover {
+    background-color: #5430d4;
+    transform: scale(1.02);
+  }
+
+
+  #modalTiket {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  #modalTiket .modal-content {
+    background: #1f1f1f;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 450px;
+    width: 100%;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(107, 72, 255, 0.3);
+    animation: fadeIn 0.3s ease;
+  }
+
+  #modalTiket h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 20px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+  }
+
+  #modalTiket p {
+    margin: 10px 0;
+    font-size: 15px;
+  }
+
+  #modalTiket button {
+    margin-top: 20px;
+    background-color: #6b48ff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    width: 100%;
+    font-weight: bold;
+    transition: 0.3s ease;
+    cursor: pointer;
+  }
+
+  #modalTiket button:hover {
+    background-color: #5430d4;
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(-10px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+</style>
+</head>
+<body>
+
+    <div class="flex-navbar">
+        <div class="logo">
+            <img src="../Frame_1__2_-removebg-preview.png" alt="">
+            <h1>I X P L A Y</h1>
+        </div>
+        <div class="flex-menu">
+            <ul>
+                <li><a href="#home">Beranda</a></li>
+                <li><button onclick="btndropdown()">Turnamen</button><img src="../../../asset/icon/arrowdown.png" alt=""></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="../index.html">KELUAR</a></li>
+            </ul>
+            <div class="search">
+                <img src="../../asset/icon/search.svg" alt="">
+                <input type="text" placeholder="Temukan">
+            </div>
+            <a href="dashboard.html" class="circle"></a>
+        </div>
+    </div>
+    <div class="dropdown hidden" id="dropdown">
+        <li><a href="#ml">Mobile Legends <img src="../../asset/icon/trending-up.svg" alt=""></a></li>
+        <li><a href="#ff">Free Fire <img src="../../asset/icon/trending-up.svg" alt=""></a></li>
+        <li><a href="#pubg">PUBG <img src="../../asset/icon/trending-up.svg" alt=""></a></li>
+        <li><a href="#valo">Valorant <img src="../../asset/icon/trending-down.svg" alt=""></a></li>
+    </div>
+    <div class="space"></div>
+
+<div class="container">
+  <div class="dashboard">
+    <h1>Pendaftaran Turnamen</h1>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID Tim</th>
+          <th>Nama Turnamen</th>
+          <th>Peserta 1</th>
+          <th>Peserta 2</th>
+          <th>Peserta 3</th>
+          <th>Peserta 4</th>
+          <th>Tanggal Daftar</th>
+          <th>Bukti Bayar</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+<tbody>
+  <tr>
+    <td>1</td>
+    <td>Turnamen PUBG</td>
+    <td>Andi</td>
+    <td>Rudi</td>
+    <td>Wawan</td>
+    <td>Budi</td>
+    <td>25 Desember 2024</td>
+    <td><a href="#" style="color: #6b48ff;">Lihat Bukti</a></td>
+    <td><button class="btn-logout" onclick="showTiket('TM001', 'Turnamen PUBG', ['Andi', 'Rudi', 'Wawan', 'Budi'], '25 Desember 2024')">Lihat Tiket</button></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Turnamen Mobile Legends</td>
+    <td>Joko</td>
+    <td>Siti</td>
+    <td>Tina</td>
+    <td>Wira</td>
+    <td>28 Desember 2024</td>
+    <td><a href="#" style="color: #6b48ff;">Lihat Bukti</a></td>
+    <td><button class="btn-logout" onclick="showTiket('TM002', 'Turnamen Mobile Legends', ['Joko', 'Siti', 'Tina', 'Wira'], '28 Desember 2024')">Lihat Tiket</button></td>
+  </tr>
+  <tr class="highlight">
+    <td>3</td>
+    <td>Turnamen Free Fire</td>
+    <td>Agus</td>
+    <td>Dina</td>
+    <td>Rama</td>
+    <td>Lina</td>
+    <td>1 Januari 2025</td>
+    <td><a href="#" style="color: #6b48ff;">Lihat Bukti</a></td>
+    <td><button class="btn-logout" onclick="showTiket('TM003', 'Turnamen Free Fire', ['Agus', 'Dina', 'Rama', 'Lina'], '1 Januari 2025')">Lihat Tiket</button></td>
+  </tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+
+
+<div id="modalTiket" style="display:none; position: fixed; top: 0; left: 0; width:100%; height:100%; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center;">
+  <div style="background: #2f2f2f; padding: 30px; border-radius: 10px; max-width: 500px; color: white; position: relative;">
+    <h2 style="text-align: center; margin-bottom: 20px;">Tiket Pendaftaran</h2>
+    <div id="tiketContent"></div>
+    <button onclick="closeTiket()" style="margin-top: 20px; background-color: #6b48ff; color: white; border: none; padding: 10px 20px; border-radius: 5px; width: 100%;">Tutup</button>
+  </div>
+</div>
+
+<script>
+  const dropdown = document.getElementById('dropdown');
+
+  function btndropdown() {
+    if (dropdown.classList.contains("hidden")) {
+      dropdown.classList.remove("hidden");
+      dropdown.classList.add("muncul");
+      dropdown.style.animation = 'down 0.4s';
+    } else {
+      dropdown.style.animation = 'up 0.4s';
+      setTimeout(() => {
+        dropdown.classList.remove("muncul");
+        dropdown.classList.add("hidden");
+      }, 400);
+    }
+  }
+
+  function showTiket(id, turnamen, peserta, tanggal) {
+    const tiketContent = document.getElementById("tiketContent");
+    tiketContent.innerHTML = `
+      <p><strong>ID Tim:</strong> ${id}</p>
+      <p><strong>Nama Turnamen:</strong> ${turnamen}</p>
+      <p><strong>Tanggal Daftar:</strong> ${tanggal}</p>
+      <p><strong>Peserta:</strong><br>
+        - ${peserta[0]}<br>
+        - ${peserta[1]}<br>
+        - ${peserta[2]}<br>
+        - ${peserta[3]}
+      </p>
+    `;
+    document.getElementById("modalTiket").style.display = "flex";
+  }
+
+  function closeTiket() {
+    document.getElementById("modalTiket").style.display = "none";
+  }
+</script>
+
+
+</body>
+</html>

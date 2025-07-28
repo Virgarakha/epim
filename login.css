@@ -79,7 +79,7 @@ body{
     width: 50%;
     height: 100vh;
     background-position: center;
-    background-image: url(./asset/img/tourvalo/4.png);
+    background-image: url(./asset/img/tourpubg/1.png);
     border-radius: 10px;
     background-size: cover;
     background-repeat: no-repeat;
@@ -94,7 +94,7 @@ body{
 }
 
 .btn-login {
-    background-color: #FB4655;
+    background: #6b48ff;
     padding: 15px;
     width: 100%;
     display: flex;
@@ -136,7 +136,17 @@ body{
 }
 
 .register a{
-    color: #FB4655;
+    color: #6b48ff;;
 }
 
 
+.logo {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo img {
+    width: 100px;
+}
