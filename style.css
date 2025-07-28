@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 * {
     padding: 0;
     margin: 0;
@@ -252,6 +252,7 @@
 
 .card-event h1 {
     font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
     padding: 10px;
     text-align: start;
 }
@@ -259,12 +260,15 @@
 .card-event li {
     color: gray;
     display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+
     align-items: center;
     gap: 10px;
     padding: 5px 10px;
 }
 
 .card-event2 h1 {
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 25px;
     padding: 10px;
     text-align: start;
@@ -274,6 +278,7 @@
     color: gray;
     display: flex;
     align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
     gap: 10px;
     padding: 5px 10px;
 }
@@ -568,11 +573,13 @@ footer {
 }
 
 .about {
-    width: 80%;
-    padding: 20px;
+    width: 90%;
+    padding: 40px;
     margin: 0 auto;
     color: white;
-    margin-top: 10vh;
+    text-align: center;
+    margin-top: 15vh;
+    border-radius: 20px;
 }
 
 .about h1 {
@@ -580,24 +587,22 @@ footer {
     font-size: 40px;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
 }
 
 .about p {
     font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
-    color: rgb(208, 208, 208);
+    color: rgb(215, 215, 215);
 }
 
-.about span {
-    color: #7B00FF;
-}
 
-.about .square {
+/* .about .square {
     background-color: #7B00FF;
     color: white;
     padding: 10px;
-}
+} */
 
 .tournament-popup {
     position: fixed;
@@ -605,21 +610,31 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(20, 20, 20, 0.85);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    font-family: 'Poppins', sans-serif;
 }
 
 .popup-content {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
+    background: linear-gradient(145deg, #2d2d2d, #1f1f1f);
+    padding: 30px;
+    border-radius: 16px;
     width: 90%;
-    max-width: 500px;
+    max-width: 520px;
     position: relative;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: start;
+    box-shadow: 0 0 15px rgba(93, 93, 93, 0.4);
+    color: white;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.popup-content img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(108, 71, 255, 0.5);
 }
 
 .close-popup {
@@ -627,19 +642,18 @@ footer {
     top: 10px;
     right: 15px;
     font-size: 24px;
-    text-decoration: none;
-    color: #333;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.3s;
 }
-
-.popup-content h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    text-align: center;
+.close-popup:hover {
+    color: #fff;
 }
 
 .popup-details p {
     display: flex;
     align-items: center;
+    justify-content: start;
     gap: 10px;
     margin: 10px 0;
     font-size: 16px;
@@ -647,41 +661,30 @@ footer {
 
 .popup-details img {
     width: 20px;
-}
-
-.popup-description {
-    margin: 20px 0;
+    filter: brightness(0) invert(1);
 }
 
 .popup-description h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
+    font-size: 20px;
+    margin: 20px 0 10px;
+    color: #b9aaff;
+    text-align: start;
 }
 
 .popup-content .JoinBtn {
-    display: block;
-    text-align: center;
-    padding: 10px;
+    display: inline-block;
+    padding: 12px 20px;
     background: #6b48ff;
     color: white;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 8px;
     margin-top: 20px;
+    transition: background 0.3s;
 }
-
 .popup-content .JoinBtn:hover {
     background: #5a3ad4;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.8); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-@keyframes fadeOut {
-    from { opacity: 1; transform: scale(1); }
-    to { opacity: 0; transform: scale(0.8); }
-}
 
 .hidden {
     display: none;
@@ -690,3 +693,157 @@ footer {
 .muncul {
     display: flex;
 }
+
+.about-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 90px;
+}
+
+.flex-col {
+    display: flex;
+    text-align: start   ;
+    flex-direction: column;
+    align-items: start;
+}
+
+.about img {
+    width: 300px;
+}
+
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      padding: 20px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      background-color: #a100ff;
+      transform: translateX(-50%);
+    }
+    .timeline-item {
+      position: relative;
+      width: 55%;
+      padding: 20px;
+      margin-bottom: 20px;
+      background-color: #2a2a2a;
+      border-radius: 5px;
+    }
+    .timeline-item:nth-child(odd) {
+      margin-left: 0;
+      margin-right: 55%;
+    }
+    .timeline-item:nth-child(even) {
+      margin-left: 55%;
+      margin-right: 0;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 20px;
+      height: 20px;
+      background-color: #a100ff;
+      border-radius: 50%;
+      transform: translateY(-50%);
+    }
+    .timeline-item:nth-child(odd)::before {
+      left: -10px;
+    }
+    .timeline-item:nth-child(even)::before {
+      right: -10px;
+    }
+    .timeline-item h2 {
+      margin: 0 0 10px 0;
+      font-size: 1.2em;
+      color: #a100ff;
+    }
+    .timeline-item p {
+      margin: 0;
+      font-size: 0.9em;
+    }
+
+    .timeline-container {
+      color: #e0e0e0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .faq-container h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: 50px;
+    margin-bottom: 24px;
+    color: #ffffff;
+    text-align: start;
+  }
+
+  .faq-container {
+    max-width: 80%;
+    margin: 40px auto;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0 16px;
+  }
+
+  .faq-item {
+    margin-bottom: 16px;
+    border: 1px solid #808080;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #1e1e1e;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .faq-question {
+    background-color: #353535;
+    color: #ffffff;
+    padding: 14px 20px;
+    font-weight: bold;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .faq-question:hover {
+    background-color: #060606;
+  }
+
+  .faq-question:focus {
+    outline: 2px solid #2c2c2c;
+  }
+
+  .faq-icon {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #8a2be2;
+    user-select: none;
+    transition: transform 0.2s ease;
+  }
+
+  .faq-answer {
+    background-color: #1e1e1e;
+    padding: 16px 20px;
+    font-size: 0.95rem;
+    color: #d2d2d2;
+    line-height: 1.6;
+    display: none;
+  }
+
+  .blog {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+  }
