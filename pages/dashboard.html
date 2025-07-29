@@ -15,12 +15,12 @@
       body {
         margin: 0;
         background-color: #1f1b3a;
-        font-family: 'Orbitron', sans-serif;
+        font-family: 'sixfont';
         color: white;
         overflow-x: hidden;
         position: relative;
-        height: 100vh;
         line-height: 1.6;
+        height: 100vh;
       }
 
       /* Background image faint */
@@ -36,6 +36,7 @@
 
       .container {
         max-width: 90%;
+        font-family: 'Orbitron', sans-serif;
         margin: 0 auto;
         padding: 40px 20px 80px;
         display: flex;
@@ -43,7 +44,6 @@
         gap: 32px;
       }
 
-      /* Top section: table and sidebar */
       .top-section {
         display: flex;
         flex-direction: column;
@@ -65,7 +65,7 @@
         border-radius: 20px;
         padding: 28px;
         backdrop-filter: blur(15px);
-        max-height: 400px;
+        max-height: 90vh;
         overflow-y: auto;
         scrollbar-width: thin;
         scrollbar-color: #7c3aed rgba(255, 255, 255, 0.1);
@@ -207,6 +207,8 @@
         box-shadow: 0 6px 20px rgba(124, 58, 237, 0.5);
         background: linear-gradient(45deg, #6b21a8, #9333ea);
       }
+
+      /* Sidebar container */
       .sidebar {
         width: 100%;
         max-width: 350px;
@@ -328,7 +330,7 @@
         transform: translateY(-50%);
       }
 
-        .popup-overlay {
+      .popup-overlay {
         position: fixed;
         top: 0;
         left: 0;
@@ -355,7 +357,7 @@
         border: 2px solid #4a4a4a;
         border-radius: 24px;
         padding: 0;
-        max-width: 60%;
+        max-width: 50%;
         max-height: 90vh;
         overflow: hidden;
         transform: scale(0.8) translateY(50px);
@@ -406,9 +408,8 @@
         transform: rotate(90deg);
       }
 
+      /* Ticket Popup Styles */
       .ticket-container {
-        
-        max-width: 90vw;
         background: #1c1c1c;
         border-radius: 16px;
         overflow: hidden;
@@ -587,7 +588,7 @@
         
         .sidebar {
           max-width: 100%;
-          max-height: 300px;
+          max-height: 90vh;
         }
         
         .sidebar-item {
@@ -679,10 +680,10 @@
               <tr>
                 <td>001</td>
                 <td>Mobile Legends Championship</td>
-                <td>PriaRosok'an</td>
+                <td>TeamOKE</td>
                 <td>1 Jan 2025</td>
                 <td><span class="proof" tabindex="0" onclick="showProofPopup('https://storage.googleapis.com/a1aa/image/proof1.jpg')">Lihat Bukti</span></td>
-                <td><button class="btn-ticket" type="button" onclick="showTicketPopup('Mobile Legends Championship', 'PriaRosok\'an', 'Bracket A', 'MLCH-001-2025', '15 Februari 2025')">Lihat Tiket</button></td>
+                <td><button class="btn-ticket" type="button" onclick="showTicketPopup('Mobile Legends Championship', 'TeamOKE', 'Bracket A', 'MLCH-001-2025', '15 Februari 2025')">Lihat Tiket</button></td>
               </tr>
               <tr>
                 <td>002</td>
@@ -763,6 +764,21 @@
       </section>
     </div>
 <script>
+        const dropdown = document.getElementById('dropdown');
+
+        function btndropdown() {
+            if (dropdown.classList.contains("hidden")) {
+                dropdown.classList.remove("hidden");
+                dropdown.classList.add("muncul");
+                dropdown.style.animation = 'down 0.4s';
+            } else {
+                dropdown.style.animation = 'up 0.4s';
+                setTimeout(() => {
+                    dropdown.classList.remove("muncul");
+                    dropdown.classList.add("hidden");
+                }, 400);
+            }
+        }
   document.addEventListener('click', function(e) {
     if (e.target.classList.contains('popup-overlay')) {
       e.target.classList.remove('show');
