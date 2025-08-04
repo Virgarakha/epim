@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="popup-content">
+        <div class="popup-header">
+          <h2 class="popup-title">Tiket Turnamen</h2>
+          <button class="close-btn" onclick="this.closest('.popup-overlay').remove(); document.body.style.overflow='auto';">&times;</button>
+        </div>
+        <div class="ticket-container">
+          <div class="ticket-top">
+            <h3 class="tournament-name">${tournament}</h3>
+            <h2 class="team-name">${team}</h2>
+          </div>
+          <div class="ticket-body">
+            <div class="ticket-info">
+              <div class="info-item">
+                <div class="info-label">Bracket</div>
+                <div class="info-value">${bracket}</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">Tanggal</div>
+                <div class="info-value">${date}</div>
+              </div>
+            </div>
+            <div class="ticket-code">
+              <div class="code-label">Kode Tiket</div>
+              <div class="code-value">${code}</div>
+            </div>
+            <div class="barcode-section">
+              <div class="barcode"></div>
+              <div class="barcode-text">${code}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+</body>
+</html>
