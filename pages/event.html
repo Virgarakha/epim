@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard Admin - Manajemen Event Esport</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&display=swap');
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background-color: #1f1b3a;
+        font-family: 'Orbitron', sans-serif;
+        color: white;
+        overflow-x: hidden;
+        position: relative;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: url('https://storage.googleapis.com/a1aa/image/1d48d9e5-23dd-4623-46a0-a9b0a81b19dd.jpg') center/cover no-repeat;
+        opacity: 0.15;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .admin-header {
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(15px);
+        border-bottom: 2px solid rgba(124, 58, 237, 0.3);
+        padding: 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .header-content {
+        max-width: 95%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+      }
+
+      .admin-title {
+        font-size: 1.8rem;
+        font-weight: 800;
+        background: linear-gradient(45deg, #7c3aed, #a855f7);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .admin-info {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .admin-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(45deg, #7c3aed, #a855f7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.2rem;
+      }
+
+      .admin-name {
+        font-weight: 600;
+        color: #e2e8f0;
+      }
+
+      .logout-btn {
+        background: linear-gradient(45deg, #ef4444, #dc2626);
+        border: none;
+        border-radius: 8px;
+        color: white;
+        font-weight: 600;
+        padding: 8px 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-size: 0.8rem;
+      }
+
+      .logout-btn:hover {
+        background: linear-gradient(45deg, #dc2626, #b91c1c);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(239, 68, 68, 0.3);
+      }
+
+      .container {
+        max-width: 95%;
+        margin: 0 auto;
+        padding: 30px 20px;
+      }
+
+      .stats-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 24px;
+        margin-bottom: 40px;
+      }
+
+      .stat-card {
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(124, 58, 237, 0.3);
+        border-radius: 16px;
+        padding: 24px;
+        backdrop-filter: blur(15px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .stat-card:hover {
+        border-color: rgba(124, 58, 237, 0.5);
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(124, 58, 237, 0.2);
+      }
+
+      .stat-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-bottom: 16px;
+      }
+
+      .stat-active .stat-icon {
+        background: linear-gradient(45deg, #10b981, #059669);
+      }
+
+      .stat-upcoming .stat-icon {
+        background: linear-gradient(45deg, #f59e0b, #d97706);
+      }
+
+      .stat-completed .stat-icon {
+        background: linear-gradient(45deg, #6366f1, #4f46e5);
+      }
+
+      .stat-total .stat-icon {
+        background: linear-gradient(45deg, #7c3aed, #a855f7);
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+        background: linear-gradient(45deg, #ffffff, #e2e8f0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .stat-label {
+        font-size: 0.9rem;
+        color: #9ca3af;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 600;
+      }
+
+      .action-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .add-event-btn {
+        background: linear-gradient(45deg, #10b981, #059669);
+        border: none;
+        border-radius: 12px;
+        color: white;
+        font-weight: 700;
+        padding: 12px 24px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .add-event-btn:hover {
+        background: linear-gradient(45deg, #059669, #047857);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+      }
+
+      .table-section {
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(124, 58, 237, 0.3);
+        border-radius: 20px;
+        padding: 32px;
+        backdrop-filter: blur(15px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin-bottom: 24px;
+        background: linear-gradient(45deg, #7c3aed, #a855f7);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .table-container {
+        overflow-x: auto;
+        border-radius: 12px;
+        border: 1px solid rgba(124, 58, 237, 0.2);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        font-size: 14px;
+        color: white;
+        min-width: 1200px;
+      }
+
+      thead tr {
+        background: linear-gradient(45deg, rgba(124, 58, 237, 0.3), rgba(168, 85, 247, 0.3));
+      }
+
+      thead th {
+        padding: 16px 12px;
+        text-align: left;
+        font-weight: 700;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #e2e8f0;
+        border-bottom: 2px solid rgba(124, 58, 237, 0.4);
+      }
+
+      tbody tr {
+        background: rgba(255, 255, 255, 0.03);
+        border-bottom: 1px solid rgba(124, 58, 237, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      tbody tr:hover {
+        background: rgba(124, 58, 237, 0.1);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 16px rgba(124, 58, 237, 0.15);
+      }
+
+      tbody td {
+        padding: 16px 12px;
+        font-weight: 500;
+        vertical-align: middle;
+      }
+
+      .event-image {
+        width: 60px;
+        height: 60px;
+        border-radius: 8px;
+        object-fit: cover;
+        border: 2px solid rgba(124, 58, 237, 0.3);
+      }
+
+      .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        white-space: nowrap;
+      }
+
+      .status-active {
+        background: rgba(16, 185, 129, 0.2);
+        color: #34d399;
+        border: 1px solid rgba(16, 185, 129, 0.3);
+      }
+
+      .status-upcoming {
+        background: rgba(245, 158, 11, 0.2);
+        color: #fbbf24;
+        border: 1px solid rgba(245, 158, 11, 0.3);
+      }
+
+      .status-completed {
+        background: rgba(99, 102, 241, 0.2);
+        color: #a5b4fc;
+        border: 1px solid rgba(99, 102, 241, 0.3);
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        border: none;
+        border-radius: 6px;
+        color: white;
+        font-weight: 600;
+        font-size: 0.75rem;
+        padding: 8px 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        white-space: nowrap;
+      }
+
+      .btn-edit {
+        background: linear-gradient(45deg, #3b82f6, #2563eb);
+      }
+
+      .btn-edit:hover {
+        background: linear-gradient(45deg, #2563eb, #1d4ed8);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+      }
+
+      .btn-delete {
+        background: linear-gradient(45deg, #ef4444, #dc2626);
+      }
+
+      .btn-delete:hover {
+        background: linear-gradient(45deg, #dc2626, #b91c1c);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+      }
+
+      /* Modal Styles */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .modal-overlay.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modal-content {
+        background: #1c1c1c;
+        border: 2px solid #4a4a4a;
+        border-radius: 20px;
+        padding: 0;
+        max-width: 800px;
+        max-height: 90vh;
+        overflow-y: auto;
+        transform: scale(0.8) translateY(50px);
+        transition: all 0.3s ease;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        width: 90%;
+      }
+
+      .modal-overlay.show .modal-content {
+        transform: scale(1) translateY(0);
+      }
+
+      .modal-header {
+        background: linear-gradient(45deg, #7c3aed, #a855f7);
+        padding: 20px 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .modal-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .close-btn {
+        background: none;
+        border: none;
+        color: #ffffff;
+        font-size: 24px;
+        cursor: pointer;
+        padding: 5px;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 35px;
+        height: 35px;
+      }
+
+      .close-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: rotate(90deg);
+      }
+
+      .modal-body {
+        padding: 24px;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-group.full-width {
+        grid-column: 1 / -1;
+      }
+
+      .form-label {
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #e2e8f0;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-size: 0.85rem;
+      }
+
+      .form-input,
+      .form-textarea,
+      .form-select {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(124, 58, 237, 0.3);
+        border-radius: 8px;
+        color: white;
+        padding: 12px;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+      }
+
+      .form-input:focus,
+      .form-textarea:focus,
+      .form-select:focus {
+        outline: none;
+        border-color: #a855f7;
+        box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      .form-textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      .file-input-wrapper {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      .file-input {
+        position: absolute;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+      }
+
+      .file-input-display {
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px dashed rgba(124, 58, 237, 0.3);
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .file-input-display:hover {
+        border-color: #a855f7;
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      .file-preview {
+        max-width: 200px;
+        max-height: 200px;
+        border-radius: 8px;
+        margin-top: 10px;
+      }
+
+      .modal-footer {
+        padding: 24px;
+        border-top: 1px solid rgba(124, 58, 237, 0.2);
+        display: flex;
+        gap: 12px;
+        justify-content: flex-end;
+      }
+
+      .btn-primary {
+        background: linear-gradient(45deg, #10b981, #059669);
+        border: none;
+        border-radius: 8px;
+        color: white;
+        font-weight: 600;
+        padding: 12px 24px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .btn-primary:hover {
+        background: linear-gradient(45deg, #059669, #047857);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(124, 58, 237, 0.3);
+        border-radius: 8px;
+        color: white;
+        font-weight: 600;
+        padding: 12px 24px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: #a855f7;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px 16px;
+        }
+
+        .header-content {
+          flex-direction: column;
+          gap: 16px;
+          text-align: center;
+        }
+
+        .admin-title {
+          font-size: 1.4rem;
+        }
+
+        .stats-section {
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 16px;
+        }
+
+        .stat-number {
+          font-size: 2rem;
+        }
+
+        .table-section {
+          padding: 20px;
+        }
+
+        .action-section {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .modal-content {
+          width: 95%;
+          margin: 10px;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body>
+  
+    <header class="admin-header">
+        <div class="header-content">
+            <h1 class="admin-title">Dashboard Admin</h1>
+            <div class="admin-info">
+                <div class="admin-avatar">A</div>
+                <span class="admin-name">Admin SIXPLAY</span>
+                <button class="logout-btn" onclick="location.href='../index.html'">
+                    <i class="fas fa-sign-out-alt"></i> Keluar
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Statistics Section -->
+        <section class="stats-section">
+            <div class="stat-card stat-active">
+                <div class="stat-icon">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+                <div class="stat-number" id="activeCount">5</div>
+                <div class="stat-label">Event Aktif</div>
+            </div>
+            <div class="stat-card stat-upcoming">
+                <div class="stat-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div class="stat-number" id="upcomingCount">8</div>
+                <div class="stat-label">Event Mendatang</div>
+            </div>
+            <div class="stat-card stat-completed">
+                <div class="stat-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div class="stat-number" id="completedCount">12</div>
+                <div class="stat-label">Event Selesai</div>
+            </div>
+            <div class="stat-card stat-total">
+                <div class="stat-icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <div class="stat-number" id="totalCount">25</div>
+                <div class="stat-label">Total Event</div>
+            </div>
+        </section>
+
+        <!-- Table Section -->
+        <section class="table-section">
+            <div class="action-section">
+                <h2 class="section-title">Manajemen Event Esport</h2>
+                <button class="add-event-btn" onclick="openAddEventModal()">
+                    <i class="fas fa-plus"></i> Tambah Event Baru
+                </button>
+            </div>
+
+            <div class="table-container">
+                <table id="eventTable">
+                    <thead>
+                        <tr>
+                            <th>Foto</th>
+                            <th>Nama Event</th>
+                            <th>Harga</th>
+                            <th>Tanggal</th>
+                            <th>Lokasi</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Data akan diisi oleh JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <!-- Add/Edit Event Modal -->
+    <div class="modal-overlay" id="eventModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Tambah Event Baru</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="eventForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Nama Event</label>
+                            <input type="text" class="form-input" id="eventName" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Harga (Rp)</label>
+                            <input type="number" class="form-input" id="eventPrice" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tanggal Event</label>
+                            <input type="date" class="form-input" id="eventDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Lokasi</label>
+                            <input type="text" class="form-input" id="eventLocation" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label class="form-label">Foto Event</label>
+                            <div class="file-input-wrapper">
+                                <input type="file" class="file-input" id="eventImage" accept="image/*" onchange="previewImage(this)">
+                                <div class="file-input-display">
+                                    <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                                    <div>Klik untuk upload foto event</div>
+                                    <div style="font-size: 0.8rem; color: #9ca3af; margin-top: 5px;">Format: JPG, PNG, max 5MB</div>
+                                </div>
+                            </div>
+                            <img id="imagePreview" class="file-preview" style="display: none;">
+                        </div>
+                        <div class="form-group full-width">
+                            <label class="form-label">Deskripsi Event</label>
+                            <textarea class="form-textarea" id="eventDescription" rows="4" placeholder="Masukkan deskripsi lengkap event..."></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <label class="form-label">Guidebook (Link atau File)</label>
+                            <input type="text" class="form-input" id="eventGuidebook" placeholder="https://example.com/guidebook.pdf atau upload file">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeModal()">Batal</button>
+                <button class="btn-primary" onclick="saveEvent()">Simpan Event</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+let eventData = [
+    {
+        id: 'EVENT001',
+        name: 'Mobile Legends Championship 2025',
+        price: 150000,
+        date: '2025-02-15',
+        location: 'Jakarta Convention Center',
+        image: '../asset/img/tourml/1.png',
+        status: 'upcoming',
+        description: 'Turnamen Mobile Legends terbesar tahun 2025 dengan total hadiah 1 miliar rupiah.',
+        guidebook: 'https://example.com/ml-guidebook.pdf'
+    },
+    {
+        id: 'EVENT002',
+        name: 'Free Fire Pro League Season 5',
+        price: 100000,
+        date: '2025-01-20',
+        location: 'Surabaya Sports Hall',
+        image: '../asset/img/tourepep/2.png',
+        status: 'active',
+        description: 'Liga profesional Free Fire dengan sistem round robin dan playoff.',
+        guidebook: 'https://example.com/ff-guidebook.pdf'
+    },
+    {
+        id: 'EVENT003',
+        name: 'PUBG Mobile National Cup',
+        price: 200000,
+        date: '2024-12-15',
+        location: 'Bandung Esports Arena',
+        image: '../asset/img/tourpubg/1.png',
+        status: 'completed',
+        description: 'Kompetisi PUBG Mobile tingkat nasional dengan format battle royale.',
+        guidebook: 'https://example.com/pubg-guidebook.pdf'
+    },
+    {
+        id: 'EVENT004',
+        name: 'Valorant Invitational Tournament',
+        price: 250000,
+        date: '2025-03-10',
+        location: 'Bali International Convention',
+        image: '../asset/img/tourvalo/1.png',
+        status: 'upcoming',
+        description: 'Turnamen undangan Valorant dengan tim-tim terbaik Asia Tenggara.',
+        guidebook: 'https://example.com/valorant-guidebook.pdf'
+    }
+];
+
+let currentEditId = null;
+
+function formatPrice(price) {
+    return new Intl.NumberFormat('id-ID', {
+        style: 'decimal',
+        minimumFractionDigits: 0
+    }).format(price);
+}
+
+function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('id-ID', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+    });
+
+}
+
+function getStatusIcon(status) {
+    switch (status) {
+        case 'active':
+            return '<i class="fas fa-play-circle"></i>';
+        case 'upcoming':
+            return '<i class="fas fa-calendar-alt"></i>';
+        case 'completed':
+            return '<i class="fas fa-trophy"></i>';
+        default:
+            return '';
+    }
+}
+
+function getStatusText(status) {
+    switch (status) {
+        case 'active':
+            return 'Aktif';
+        case 'upcoming':
+            return 'Mendatang';
+        case 'completed':
+            return 'Selesai';
+        default:
+            return 'Unknown';
+    }
+}
+
+function renderTable() {
+    const tableBody = document.getElementById('tableBody');
+    
+    if (eventData.length === 0) {
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="7" style="text-align: center; padding: 40px; color: #9ca3af;">
+                    Belum ada event yang dibuat
+                </td>
+            </tr>`;
+        updateStats();
+        return;
+    }
+
+    tableBody.innerHTML = eventData.map(event => `
+        <tr>
+            <td><img src="${event.image}" alt="${event.name}" class="event-image"></td>
+            <td><strong>${event.name}</strong></td>
+            <td>Rp ${formatPrice(event.price)}</td>
+            <td>${formatDate(event.date)}</td>
+            <td>${event.location}</td>
+            <td>
+                <span class="status-badge status-${event.status}">
+                    ${getStatusIcon(event.status)}
+                    ${getStatusText(event.status)}
+                </span>
+            </td>
+            <td>
+                <div class="action-buttons">
+                    <button class="btn btn-edit" onclick="openEditEventModal('${event.id}')">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                    <button class="btn btn-delete" onclick="deleteEvent('${event.id}')">
+                        <i class="fas fa-trash"></i> Hapus
+                    </button>
+                </div>
+            </td>
+        </tr>
+    `).join('');
+
+    updateStats();
+}
+
+function updateStats() {
+    const activeCount = eventData.filter(event => event.status === 'active').length;
+    const upcomingCount = eventData.filter(event => event.status === 'upcoming').length;
+    const completedCount = eventData.filter(event => event.status === 'completed').length;
+    const totalCount = eventData.length;
+
+    document.getElementById('activeCount').textContent = activeCount;
+    document.getElementById('upcomingCount').textContent = upcomingCount;
+    document.getElementById('completedCount').textContent = completedCount;
+    document.getElementById('totalCount').textContent = totalCount;
+}
+
+function openAddEventModal() {
+    currentEditId = null;
+    document.getElementById('modalTitle').textContent = 'Tambah Event Baru';
+    document.getElementById('eventForm').reset();
+    document.getElementById('imagePreview').style.display = 'none';
+    document.getElementById('eventModal').classList.add('show');
+}
+
+function openEditEventModal(id) {
+    const event = eventData.find(e => e.id === id);
+    if (!event) return;
+
+    currentEditId = id;
+    document.getElementById('modalTitle').textContent = 'Edit Event';
+    document.getElementById('eventName').value = event.name;
+    document.getElementById('eventPrice').value = event.price;
+    document.getElementById('eventDate').value = event.date;
+    document.getElementById('eventLocation').value = event.location;
+    document.getElementById('eventDescription').value = event.description;
+    document.getElementById('eventGuidebook').value = event.guidebook;
+    document.getElementById('imagePreview').src = event.image;
+    document.getElementById('imagePreview').style.display = 'block';
+    document.getElementById('eventModal').classList.add('show');
+}
+
+function closeModal() {
+    document.getElementById('eventModal').classList.remove('show');
+    document.getElementById('eventForm').reset();
+    document.getElementById('imagePreview').style.display = 'none';
+    currentEditId = null;
+}
+
+function previewImage(input) {
+    const preview = document.getElementById('imagePreview');
+    const file = input.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    } else {
+        preview.style.display = 'none';
+    }
+}
+
+function saveEvent() {
+    const eventName = document.getElementById('eventName').value.trim();
+    const eventPrice = parseInt(document.getElementById('eventPrice').value);
+    const eventDate = document.getElementById('eventDate').value;
+    const eventLocation = document.getElementById('eventLocation').value.trim();
+    const eventDescription = document.getElementById('eventDescription').value.trim();
+    const eventGuidebook = document.getElementById('eventGuidebook').value.trim();
+    const eventImage = document.getElementById('eventImage').files[0];
+    const imagePreview = document.getElementById('imagePreview').src;
+
+    if (!eventName || !eventPrice || !eventDate || !eventLocation) {
+        alert('Harap isi semua kolom wajib!');
+        return;
+    }
+
+    const today = new Date();
+    const eventDateObj = new Date(eventDate);
+    const status = eventDateObj < today ? 'completed' : 
+                   eventDateObj.toDateString() === today.toDateString() ? 'active' : 'upcoming';
+
+    const event = {
+        id: currentEditId || `EVENT${String(eventData.length + 1).padStart(3, '0')}`,
+        name: eventName,
+        price: eventPrice,
+        date: eventDate,
+        location: eventLocation,
+        image: imagePreview || 'https://via.placeholder.com/400x300/7c3aed/ffffff?text=Event',
+        status: status,
+        description: eventDescription,
+        guidebook: eventGuidebook
+    };
+
+    if (currentEditId) {
+        const index = eventData.findIndex(e => e.id === currentEditId);
+        eventData[index] = event;
+    } else {
+        eventData.push(event);
+    }
+
+    renderTable();
+    closeModal();
+}
+
+
+function deleteEvent(id) {
+    if (confirm('Apakah Anda yakin ingin menghapus event ini?')) {
+        eventData = eventData.filter(event => event.id !== id);
+        renderTable();
+    }
+}
+
+function logout() {
+    if (confirm('Apakah Anda yakin ingin keluar?')) {
+  
+        alert('Logout berhasil!');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', renderTable);
+</script>
+</body> 
+</html>
