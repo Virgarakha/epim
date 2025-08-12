@@ -1,0 +1,12 @@
+1. Pendaftaran Online Cepat & Mudah
+	Peserta dapat mendaftar langsung melalui website tanpa harus datang ke lokasi, cukup 	isi formulir online dan unggah data yang diperlukan.
+
+2. Informasi Turnamen Lengkap
+	Tersedia jadwal pertandingan, peraturan, hadiah, dan daftar tim yang sudah 	
+	terdaftar, semua dapat diakses kapan saja.
+
+3. Pembayaran Mendukung berbagai metode, termasuk QRIS.
+
+4. Galeri Foto & Video Dokumentasi turnamen bisa diakses kapan saja.
+
+5. Tiket Digital Aman Tidak mudah hilang atau rusak, tersimpan di akun peserta.
